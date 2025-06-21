@@ -1,27 +1,8 @@
-// Step 1: Simulate User Behavior
 // - Add event listeners for button clicks and form submissions.
-// - Use JavaScript to dynamically update the DOM based on user actions.
-const button = document.getElementById("simulate-click");
-const form = document.getElementById("user-form");
-const dynamicContent = document.getElementById("dynamic-content");
-
-function simulateClick() {
-    dynamicContent.textContent = "Button was clicked!"
-}
-
-function handleFormSubmit(event) {
-    event.preventDefault(); // Prevent the page from refreshing
-    
-    const input = document.getElementById("user-input").value
-
-    // dynamicContent.textContent = "Form submitted!"
-    addElementToDOM("dynamic-content", input);
-}
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
-
+    const button = document.getElementById("simulate-click");
+    const form = document.getElementById("user-form");
+    
     if (button) {
         button.addEventListener("click", simulateClick);
     }
@@ -31,8 +12,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// - Use JavaScript to dynamically update the DOM based on user actions.
+function simulateClick() {
+    // dynamicContent.textContent = "Button was clicked!" // for initial testing
+    addElementToDOM("dynamic-content", "Button Clicked!");
+}
 
-// Step 2: DOM Manipulation Functions
+function handleFormSubmit() {
+    
+    const input = document.getElementById("user-input").value.trim(); 
+    // - Display error messages in the DOM for invalid inputs or missing elements.
+    // - Create reusable functions to handle common error cases.
+    const errorMessage = document.getElementById("error-message");
+    
+    if (!input) {
+        errorMessage.textContent = "Input cannot be empty";
+        errorMessage.classList.remove("hidden");
+        return;
+    }
+    // dynamicContent.textContent = "Form submitted!" // for initial testing
+    addElementToDOM("dynamic-content", input);
+    errorMessage.classList.add("hidden");
+}
 // - Implement functions to add, update, and remove DOM elements.
 // - Ensure all elements are dynamically created with appropriate attributes and content.
 
@@ -52,11 +53,6 @@ function removeElementFromDOM(elementID) {
     }
 }
 
-// Step 3: Error Handling
-// - Display error messages in the DOM for invalid inputs or missing elements.
-// - Create reusable functions to handle common error cases.
-
-// Step 4: Reusable Utilities
 // - Create modular utility functions, such as createElement(tag, attributes).
 // - Ensure all functions follow DRY principles for maintainability.
 
